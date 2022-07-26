@@ -5,11 +5,7 @@ import torch
 import numpy as np
 from collections import Counter
 
-def strip_accents_and_lowercase(s):
-   return ''.join(c for c in unicodedata.normalize('NFD', s)
-                  if unicodedata.category(c) != 'Mn').lower()
- 
-# Loading the pre-trained BERT model (using Greek BERT)
+# Loading the pre-trained BERT model
 
 ###################################
 # Embeddings will be derived from
@@ -19,18 +15,23 @@ bert_model = AutoModel.from_pretrained('nlpaueb/bert-base-greek-uncased-v1',
            output_hidden_states = True,).to(device)
 # Setting up the tokenizer
 ###################################
-# This is the same tokenizer that
-# was used in the model to generate
-# embeddings to ensure consistency
-# bert_model = AutoModelWithLMHead.from_pretrained('nlpaueb/bert-base-greek-uncased-v1', output_hidden_states = True).to(device)
+
+# For Greek Bert to use it is necessary the folloing function
+# which removes accents and lowercase the text
+
+def strip_accents_and_lowercase(s):
+   return ''.join(c for c in unicodedata.normalize('NFD', s)
+                  if unicodedata.category(c) != 'Mn').lower()
+ 
+
 tokenizer = AutoTokenizer.from_pretrained('nlpaueb/bert-base-greek-uncased-v1')
+
 def token(text):
-  sen = []
   text = text.strip()
   text = text.split(' ')
-  for t in text:
-    sen.append(t)
-  return sen  
+  return [sen for sen in text]  
+
+
 EMBEDDING_DIM = 768
 
 
