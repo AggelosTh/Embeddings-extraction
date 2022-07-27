@@ -173,7 +173,7 @@ input()
 
 
 
-with open('bert_emb_accom.txt', 'w', encoding='utf-8') as file:
+with open('bert_emb.txt', 'w', encoding='utf-8') as file:
   for token, i in token_index.items():#words of dataset
       if i >= MAX_NB_WORDS:
           continue
