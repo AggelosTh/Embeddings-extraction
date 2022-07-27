@@ -132,7 +132,7 @@ def toString(list):
   return ' '.join(str(v) for v in list)
 
 
-with open('corpus_accom_gr.txt', encoding='utf-8') as corpus:
+with open('corpus.txt', encoding='utf-8') as corpus:
   text = corpus.readlines()
 
 text_processed = text
@@ -150,10 +150,10 @@ all_embeddings = flatten(all_embeddings)
 dictionary = dict(zip(tokenized_texts, all_embeddings))
 # print(len(all_embeddings[0][0]))
 
-with open('greek_bert_accom.pickle', 'wb') as handle:
+with open('bert_emb.pickle', 'wb') as handle:
     pickle.dump(dictionary, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
-with open('greek_bert_accom.pickle', 'rb') as handle:
+with open('bert_emb.pickle', 'rb') as handle:
     embeddings = pickle.load(handle)
 
 # with open('bert_emb_test', 'w') as text:
